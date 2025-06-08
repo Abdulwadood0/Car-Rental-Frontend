@@ -1,0 +1,20 @@
+{
+    "Edit Profile": "Edit Profile",
+    "Personal Information": "Personal Information",
+    "Name": "Name",
+    "Email": "Email",
+    "Phone": "Phone",
+    "Address": "Address",
+    "Not provided": "Not provided",
+    "Recent Reservations": "Recent Reservations",
+    "Pickup": "Pickup",
+    "Drop-off": "Drop-off",
+    "First Name": "First Name",
+    "Last Name": "Last Name",
+    "Cancel": "Cancel",
+    "Save Changes": "Save Changes",
+    "Saving...": "Saving...",
+    "Profile updated successfully": "Profile updated successfully",
+    "Failed to update profile. Please try again.": "Failed to update profile. Please try again.",
+    "No phone number": "No phone number"
+}

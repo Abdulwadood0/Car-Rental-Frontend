@@ -1,0 +1,16 @@
+{
+    "Payment": "الدفع",
+    "Cardholder Name": "اسم حامل البطاقة",
+    "Card Number": "رقم البطاقة",
+    "Month": "شهر",
+    "Year": "سنة",
+    "Pay ": " دفع ",
+    " SAR": " ريال",
+    "pay_amount": " دفع {{price}} ريال",
+    "Payment has been completed successfully": "تم الدفع بنجاح",
+    "Payment failed": "فشل الدفع",
+    "Processing payment...": "جاري الدفع...",
+    "Car is no longer avalible": "السيارة لم تعد متوفرة",
+    "Please wait...": "الرجاء الانتظار...",
+    "For a successful payment, don't change the card information.": "لإجراء عملية دفع ناجحة، لا تقم بتغيير معلومات البطاقة."
+}

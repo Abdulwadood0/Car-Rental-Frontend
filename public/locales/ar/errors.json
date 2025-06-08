@@ -1,0 +1,23 @@
+{
+    "firstname is not allowed to be empty": "الاسم الأول غير مسموح  أن يكون فارغاً",
+    "lastname is not allowed to be empty": "الاسم الأخير غير مسموح  أن يكون فارغاً",
+    "email is not allowed to be empty": "البريد الإلكتروني غير مسموح  أن يكون فارغاً",
+    "password is not allowed to be empty": "كلمة المرور غير مسموح  أن تكون فارغاً",
+    "username is not allowed to be empty": "اسم المستخدم غير مسموح  أن يكون فارغاً",
+    "firstname length must be at least 3 characters long": "الاسم الأول يجب أن يكون على الأقل 3 أحرف",
+    "lastname length must be at least 3 characters long": "الاسم الأخير يجب أن يكون على الأقل 3 أحرف",
+    "username length must be at least 3 characters long": "اسم المستخدم يجب أن يكون على الأقل 3 أحرف",
+    "email must be a valid email": "البريد الإلكتروني يجب أن يكون صالحاً",
+    "password length must be at least 6 characters long": "كلمة المرور يجب أن تكون على الأقل 6 أحرف",
+    "All fields are required": "يرجى ادخال جميع البيانات",
+    "Password or username is incorrect": "كلمة المرور أو اسم المستخدم غير صحيح",
+    "User already exists": "المستخدم موجود بالفعل",
+    "Username must contain only lowercase English letters and numbers.": "اسم المستخدم يجب أن يحتوي فقط على أحرف إنجليزية صغيرة و أرقام ",
+    "Password must only contain English characters, numbers, and special characters.": "كلمة المرور يجب أن تحتوي فقط على أحرف إنجليزية، أرقام، و رموز خاصة",
+    "phone is required": "رقم الهاتف مطلوب",
+    "Phone number must contain only numbers.": "يجب أن يحتوي رقم الهاتف على أرقام فقط",
+    "phone length must be at least 9 characters long": "يجب أن يكون رقم الهاتف على الأقل 9 أرقام",
+    "phone length must be less than or equal to 10 characters long": "يجب أن يكون طول رقم الهاتف أقل من أو يساوي 10 ارقام",
+    "Email is already in use": "البريد الإلكتروني  مستخدم بالفعل",
+    "Phone number is already in use": "رقم الهاتف مستخدم بالفعل"
+}

@@ -1,0 +1,21 @@
+{
+    "Edit Profile": "تعديل الملف الشخصي",
+    "Personal Information": "المعلومات الشخصية",
+    "Name": "الاسم",
+    "Email": "البريد الإلكتروني",
+    "Phone": "رقم الهاتف",
+    "Address": "العنوان",
+    "Not provided": "غير متوفر",
+    "Recent Reservations": "الحجوزات الأخيرة",
+    "Pickup": "استلام",
+    "Drop-off": "إرجاع",
+    "First Name": "الاسم الأول",
+    "Last Name": "الاسم الأخير",
+    "Cancel": "إلغاء",
+    "Save Changes": "حفظ التغييرات",
+    "Saving...": "جاري الحفظ...",
+    "Profile updated successfully": "تم تحديث الملف الشخصي بنجاح",
+    "Failed to update profile. Please try again.": "فشل تحديث الملف الشخصي. يرجى المحاولة مرة أخرى.",
+    "No phone number": "لا يوجد رقم هاتف",
+    "Account updated successfully": "تم تحديث الحساب بنجاح"
+}
