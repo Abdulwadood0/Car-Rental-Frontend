@@ -35,22 +35,7 @@ import { useEffect } from "react";
 
 
 function App() {
-  useEffect(() => {
-    const stored = localStorage.getItem("user");
 
-    if (stored) {
-      const userData = JSON.parse(stored);
-
-      if (isTokenExpired(userData.token)) {
-        // localStorage.removeItem("user");
-        // Optional: navigate to login or set user to null
-        // window.location.href = "/";
-      } else {
-        // Token is valid – keep user logged in
-        //  setUser(userData);
-      }
-    }
-  }, []);
 
   const { i18n } = useTranslation();
   const user = useSelector((state) => state.auth.user);

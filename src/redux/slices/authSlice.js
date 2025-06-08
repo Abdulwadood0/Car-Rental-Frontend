@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { isTokenExpired } from "../../utils/auth";
 
+
+// Check if the user is logged in and if the token is expired
 const user = function () {
     const stored = localStorage.getItem("user");
     if (!stored) {
