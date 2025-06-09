@@ -15,9 +15,9 @@ const getTheme = (lang) => createTheme({
       contrastText: '#ffffff',
     },
     background: {
-      default: '#1A1A2E', // Deep navy
+      default: '#1A1A2E', // 
       dark: '#16213E', // Darker navy
-      paper: '#f4eeff', // Slightly lighter navy for cards
+      paper: '#F5F5F5', // light gray
     },
     text: {
       primary: '#233142', // Light gray-white

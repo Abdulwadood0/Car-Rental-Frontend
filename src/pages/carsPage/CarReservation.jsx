@@ -166,7 +166,7 @@ const CarReservation = () => {
                             {t('Car Details')}
                         </Typography>
 
-                        <ImageCarousel car={car} />
+                        <ImageCarousel car={car} height={"auto"} />
 
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                             <Typography

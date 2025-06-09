@@ -1,7 +1,7 @@
 import Slider from 'react-slick';
 import { Box } from '@mui/material';
 
-const ImageCarousel = ({ car }) => {
+const ImageCarousel = ({ car, height }) => {
     const settings = {
         dots: true,
         infinite: car?.images?.length > 1,
@@ -19,7 +19,7 @@ const ImageCarousel = ({ car }) => {
                         key={index}
                         sx={{
                             width: '100%',
-                            height: { xs: 200, sm: 220, md: 190, lg: 250 },           // fixed height for all images (adjust as needed)
+                            height: height || { xs: 200, sm: 220, md: 190, lg: 250 },           // fixed height for all images (adjust as needed)
                             overflow: 'hidden',    // hides overflow caused by cropping
                             borderRadius: '8px',
                         }}
