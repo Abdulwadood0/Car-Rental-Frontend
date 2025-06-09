@@ -9,7 +9,7 @@ i18n
     .init({
         fallbackLng: "en",
         lng: localStorage.getItem('lang') || 'en',
-        debug: true,
+        debug: false,
         returnObjects: true,
 
     });

@@ -343,6 +343,7 @@ const CarReservation = () => {
                                         />
 
                                     </LocalizationProvider>
+
                                 </Grid>
                                 <Grid item xs={12} sm={6} sx={{ direction: 'ltr' }} >
                                     <LocalizationProvider dateAdapter={AdapterDateFns} >
@@ -363,7 +364,7 @@ const CarReservation = () => {
                                                         new Date(endDate).getDate() + 30
                                                     )
                                                 )
-                                                : new Date(new Date().setDate(new Date().getDate() + 30))}
+                                                : new Date(new Date().setDate(new Date(formData.pickupDate).getDate() + 30))}
                                             slotProps={{
                                                 textField: { fullWidth: true, required: true }
                                             }}

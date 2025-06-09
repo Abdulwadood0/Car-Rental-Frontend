@@ -158,7 +158,7 @@ export default function EditResevationModal({ open, setOpen, car }) {
                                             new Date()}
                                     maxDate={endDate > new Date() ?
                                         new Date(new Date(endDate).setDate(new Date(endDate).getDate() + 30)) :
-                                        new Date(new Date().setDate(new Date().getDate() + 30))}
+                                        new Date(new Date().setDate(new Date(formData.pickupDate).getDate() + 30))}
                                     slotProps={{
                                         textField: { fullWidth: true, required: true }
                                     }}
