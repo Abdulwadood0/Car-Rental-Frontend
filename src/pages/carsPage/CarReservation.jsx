@@ -333,8 +333,8 @@ const CarReservation = () => {
                                             label={t('Pickup Date')}
                                             value={formData.pickupDate}
                                             onChange={(date) => handleDateChange(date, 'pickupDate')}
-                                            minDate={endDate ? new Date(endDate) : new Date()}
-                                            maxDate={endDate ? new Date(new Date(endDate).setDate(new Date(endDate).getDate() + 4)) :
+                                            minDate={endDate > new Date() ? new Date(endDate) : new Date()}
+                                            maxDate={endDate > new Date() ? new Date(new Date(endDate).setDate(new Date(endDate).getDate() + 4)) :
                                                 new Date(new Date().setDate(new Date().getDate() + 4))
                                             }
                                             slotProps={{
@@ -352,12 +352,12 @@ const CarReservation = () => {
                                             value={formData.dropoffDate}
                                             onChange={(date) => handleDateChange(date, 'dropoffDate')}
                                             minDate={formData.pickupDate ? new Date(new Date(formData.pickupDate).setDate(new Date(formData.pickupDate).getDate() + 1)) :
-                                                endDate ? new Date(
+                                                endDate > new Date() ? new Date(
                                                     new Date(endDate).setDate(
                                                         new Date(endDate).getDate() + 1
                                                     )
                                                 ) : new Date()}
-                                            maxDate={endDate
+                                            maxDate={endDate > new Date()
                                                 ? new Date(
                                                     new Date(endDate).setDate(
                                                         new Date(endDate).getDate() + 30

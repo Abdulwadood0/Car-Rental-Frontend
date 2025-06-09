@@ -2,7 +2,7 @@ import { Stack, Skeleton } from '@mui/material';
 
 const MySkeleton = () => {
     return (
-        <Stack spacing={1} width={"80%"} margin={8} bgcolor="background.paper">
+        <Stack spacing={1} width={"80%"} margin={1} bgcolor="background.paper">
             {/* Loading skeletons while car data is being fetched */}
             <Skeleton variant="rounded" width={"60%"} height={100} />
 

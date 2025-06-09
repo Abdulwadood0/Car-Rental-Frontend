@@ -20,7 +20,7 @@ const ReservationStatusDropdown = ({ value, onChange }) => {
     };
 
     return (
-        <FormControl sx={{ minWidth: 200, maxWidth: "200px" }} size="small">
+        <FormControl sx={{ minWidth: 200, maxWidth: "200px", mb: 3 }} size="small">
             <InputLabel id="reservation-status-label">{t("Reservation Status")}</InputLabel>
             <Select
                 labelId="reservation-status-label"
