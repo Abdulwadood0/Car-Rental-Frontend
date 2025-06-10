@@ -95,6 +95,10 @@ export default function EditResevationModal({ open, setOpen, car }) {
         }
     }, [isReservationUpdated])
 
+    // Helper function to add days
+    const addDays = (date, days) => new Date(date).getTime() + days * 86400000;
+    const getValidDate = (date) => (date instanceof Date ? date : new Date(date));
+
 
     return (
         <>
@@ -134,9 +138,9 @@ export default function EditResevationModal({ open, setOpen, car }) {
                                     label={t('Pickup Date')}
                                     value={formData.pickupDate}
                                     onChange={(date) => handleDateChange(date, 'pickupDate')}
-                                    minDate={endDate > new Date() ? new Date(endDate) : new Date()}
-                                    maxDate={endDate > new Date() ? new Date(new Date(endDate).setDate(new Date(endDate).getDate() + 4)) :
-                                        new Date(new Date().setDate(new Date().getDate() + 4))
+                                    minDate={new Date(Math.max(new Date().getTime(), new Date(endDate).getTime()))}
+                                    maxDate={
+                                        addDays(endDate || new Date(), 4)
                                     }
                                     slotProps={{
                                         textField: { fullWidth: true, required: true }
@@ -152,13 +156,20 @@ export default function EditResevationModal({ open, setOpen, car }) {
                                     label={t('Drop-off Date')}
                                     value={formData.dropoffDate}
                                     onChange={(date) => handleDateChange(date, 'dropoffDate')}
-                                    minDate={formData.pickupDate ?
-                                        new Date(new Date(formData.pickupDate).setDate(new Date(formData.pickupDate).getDate() + 1)) :
-                                        endDate > new Date() ? new Date(new Date(endDate).setDate(new Date(endDate).getDate() + 1)) :
-                                            new Date()}
-                                    maxDate={endDate > new Date() ?
-                                        new Date(new Date(endDate).setDate(new Date(endDate).getDate() + 30)) :
-                                        new Date(new Date().setDate(new Date(formData.pickupDate).getDate() + 30))}
+                                    minDate={
+                                        formData.pickupDate
+                                            ? addDays(getValidDate(formData.pickupDate), 1) // Min: pickupDate + 1 day
+                                            : endDate
+                                                ? addDays(getValidDate(endDate), 1) // Fallback: endDate + 1 day
+                                                : new Date() // Default: today
+                                    }
+                                    maxDate={
+                                        endDate > new Date()
+                                            ? addDays(getValidDate(endDate), 30) // Max: endDate + 30 days
+                                            : formData.pickupDate
+                                                ? addDays(getValidDate(formData.pickupDate), 30) // Fallback: pickupDate + 30 days
+                                                : addDays(new Date(), 30) // Default: today + 30 days
+                                    }
                                     slotProps={{
                                         textField: { fullWidth: true, required: true }
                                     }}
