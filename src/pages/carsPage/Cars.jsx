@@ -132,17 +132,18 @@ const Cars = () => {
             </Box>
 
             <Grid container spacing={2} mt={5}>
-                {loading && cars.length === 0
-                    ? Array.from({ length: 6 }).map((_, index) => (
-                        <Grid item xs={12} sm={6} md={4} key={index}>
-                            <CarCardSkeleton />
-                        </Grid>
-                    ))
+                {loading ? Array.from({ length: 6 }).map((_, index) => (
+                    <Grid item xs={12} sm={6} md={4} key={index}>
+                        <CarCardSkeleton />
+                    </Grid>
+                ))
                     : cars.map((car) => (
                         <Grid item xs={12} sm={6} md={4} key={car._id}>
                             <CarCard car={car} setOpenSnackbar={setOpenSnackbar} carsPriceRanges={carsPriceRanges} />
                         </Grid>
                     ))}
+
+
 
                 {!loading && cars.length === 0 && (
                     <Typography variant="h6" textAlign="center" sx={{ mt: 3, width: "100%" }}>
