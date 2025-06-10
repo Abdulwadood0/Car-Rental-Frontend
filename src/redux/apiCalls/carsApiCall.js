@@ -2,7 +2,7 @@ import { carsActions } from "../slices/carsSlice";
 import request from "../../utils/request";
 import { toast } from "react-toastify";
 
-export function getCars(search, page = 1, companyId = '', sortBy = '', limit = 10) {
+export function getCars(search, page = 1, companyId = '', sortBy = '', limit = 6) {
     return async (dispatch, getState) => {
         try {
             dispatch(carsActions.setLoading(true));

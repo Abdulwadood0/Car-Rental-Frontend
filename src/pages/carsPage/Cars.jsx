@@ -26,6 +26,7 @@ const Cars = () => {
     // Fetch car companies on mount
     useEffect(() => {
         dispatch(getcarCompanies());
+        dispatch(getCars('', 1, '', '')); // Fetch cars on first load
     }, [dispatch]);
 
     const handlePagenation = (page) => {
@@ -75,52 +76,81 @@ const Cars = () => {
                 flexWrap: "wrap"
             }}>
                 <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} placeholder={"Search for a car"} />
-                <TextField
-                    select
-                    label={t("Car Company")}
-                    value={selectedCompany}
-                    onChange={handleCompanyChange}
-                    sx={{ minWidth: 200 }}
-                >
-                    <MenuItem value="">
-                        {t("All Companies")}
-                    </MenuItem>
-                    {carCompanies?.map((company) => (
-                        <MenuItem key={company._id} value={company._id}>
-                            {company.name}
+
+                <Box sx={{
+                    display: "flex",
+                    gap: 1,
+
+                }}>
+
+                    <TextField
+                        select
+                        label={t("Car Company")}
+                        value={selectedCompany}
+                        onChange={handleCompanyChange}
+                        sx={{
+                            minWidth: "105px !important",
+                            "@media (min-width: 340px)": {
+                                minWidth: "160px !important",
+                            },
+                        }}
+                    >
+                        <MenuItem value="">
+                            {t("All Companies")}
                         </MenuItem>
-                    ))}
-                </TextField>
-                <TextField
-                    select
-                    label={t("Sort By Price")}
-                    value={sortBy}
-                    onChange={handleSortChange}
-                    sx={{ minWidth: 200 }}
-                >
-                    <MenuItem value="">
-                        {t("Default")}
-                    </MenuItem>
-                    <MenuItem value="asc">
-                        {t("Low to High")}
-                    </MenuItem>
-                    <MenuItem value="desc">
-                        {t("High to Low")}
-                    </MenuItem>
-                </TextField>
+                        {carCompanies?.map((company) => (
+                            <MenuItem key={company._id} value={company._id}>
+                                {company.name}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+
+                    <TextField
+                        select
+                        label={t("Sort By Price")}
+                        value={sortBy}
+                        onChange={handleSortChange}
+                        sx={{
+                            minWidth: "140px !important",
+                            "@media (min-width: 340px)": {
+                                minWidth: "160px !important",
+                            },
+                        }}
+                    >
+                        <MenuItem value="">
+                            {t("Default")}
+                        </MenuItem>
+                        <MenuItem value="asc">
+                            {t("Low to High")}
+                        </MenuItem>
+                        <MenuItem value="desc">
+                            {t("High to Low")}
+                        </MenuItem>
+                    </TextField>
+                </Box>
+
             </Box>
 
             <Grid container spacing={2} mt={5}>
-                {cars?.map((car) => (
-                    <Grid item xs={12} sm={6} md={4} key={car._id}>
-                        {!loading &&
+                {loading && cars.length === 0
+                    ? Array.from({ length: 6 }).map((_, index) => (
+                        <Grid item xs={12} sm={6} md={4} key={index}>
+                            <CarCardSkeleton />
+                        </Grid>
+                    ))
+                    : cars.map((car) => (
+                        <Grid item xs={12} sm={6} md={4} key={car._id}>
                             <CarCard car={car} setOpenSnackbar={setOpenSnackbar} carsPriceRanges={carsPriceRanges} />
-                        }
-                        {loading &&
-                            <CarCardSkeleton />}
-                    </Grid>
-                ))}
+                        </Grid>
+                    ))}
+
+                {!loading && cars.length === 0 && (
+                    <Typography variant="h6" textAlign="center" sx={{ mt: 3, width: "100%" }}>
+                        {t("No car found")}
+                    </Typography>
+                )}
             </Grid>
+
 
             <Snackbar
                 open={openSnackbar}
