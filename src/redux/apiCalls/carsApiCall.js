@@ -129,12 +129,7 @@ export function createCar(car) {
             dispatch(carsActions.setLoading(true));
 
 
-            const { data } = await request.post("api/cars", car, {
-                headers: {
-                    "Authorization": `Bearer ${getState().auth.user.token}`,
-
-                }
-            })
+            const { data } = await request.post("api/cars", car)
 
             dispatch(carsActions.setLoading(false));
             dispatch(carsActions.setIsCarCreated())
@@ -154,12 +149,7 @@ export function updateCar(car, id) {
             dispatch(carsActions.setLoading(true));
 
 
-            await request.put(`api/cars/${id}`, car, {
-                headers: {
-                    "Authorization": `Bearer ${getState().auth.user.token}`,
-
-                }
-            })
+            await request.put(`api/cars/${id}`, car)
 
             dispatch(carsActions.setLoading(false));
             dispatch(carsActions.setIsCarUpdated())
@@ -179,12 +169,7 @@ export function deleteCar(id) {
             dispatch(carsActions.setLoading(true));
 
 
-            await request.delete(`api/cars/${id}`, {
-                headers: {
-                    "Authorization": `Bearer ${getState().auth.user.token}`,
-
-                }
-            })
+            await request.delete(`api/cars/${id}`)
 
             dispatch(carsActions.setLoading(false));
             dispatch(carsActions.setIsCarDeleted())

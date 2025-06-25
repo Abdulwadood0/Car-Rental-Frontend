@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import request from "../../utils/request";
 import { authActions } from "../slices/authSlice";
 
@@ -5,9 +6,8 @@ export function login(userData) {
     return async (dispatch) => {
         try {
             const { data } = await request.post("api/auth/login", userData);
-            dispatch(authActions.login(data));
+            dispatch(authActions.setUser(data));
             dispatch(authActions.setIsLoading(false));
-            localStorage.setItem("user", JSON.stringify(data));
 
         } catch (error) {
             dispatch(authActions.setErrorMessage(error.response.data.message));
@@ -18,8 +18,14 @@ export function login(userData) {
 
 export function logout() {
     return async (dispatch) => {
-        dispatch(authActions.logout());
-        localStorage.removeItem("user");
+        try {
+            await request.post("api/auth/logout")
+            dispatch(authActions.logout());
+
+        } catch (error) {
+            toast.error("Something went wrong")
+        }
+
     }
 }
 
@@ -36,5 +42,17 @@ export function register(userData) {
             dispatch(authActions.setErrorMessage(error.response.data.message));
             dispatch(authActions.setIsLoading(false));
         }
+    }
+}
+
+export function fetchCurrentUser() {
+    return async (dispatch) => {
+        try {
+            const { data } = await request.get("api/auth/me")
+            dispatch(authActions.setUser(data))
+        } catch (error) {
+            dispatch(authActions.logout())
+        }
+
     }
 }

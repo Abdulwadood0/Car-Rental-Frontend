@@ -1,28 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { isTokenExpired } from "../../utils/auth";
-
-
-// Check if the user is logged in and if the token is expired
-const user = function () {
-    const stored = localStorage.getItem("user");
-    if (!stored) {
-        return null;
-    }
-
-    if (stored) {
-        const userData = JSON.parse(stored);
-
-        if (isTokenExpired(userData.token)) {
-            localStorage.removeItem("user");
-            window.location.href = "/login";
-        } else {
-            return userData;
-        }
-    }
-}
 
 const initialState = {
-    user: user(),
+    user: null,
     errorMessage: null,
     successMessage: null,
     isRegisterSuccess: false,
@@ -37,7 +16,7 @@ const authSlice = createSlice({
             state.user = { ...state.user, ...action.payload }
         },
 
-        login: (state, action) => {
+        setUser: (state, action) => {
             state.user = action.payload;
         },
         logout: (state) => {

@@ -8,13 +8,7 @@ export function updateAccount(account, t) {
 
         dispatch(accountActions.setIsLoading(true));
         try {
-            const { data } = await request.put(`api/users/${getState().auth.user._id}`, account,
-                {
-                    headers: {
-                        "Authorization": `Bearer ${getState().auth.user.token}`
-                    }
-                }
-            );
+            const { data } = await request.put(`api/users/${getState().auth.user._id}`, account);
 
             dispatch(accountActions.setIsAccountUpdated(true));
             dispatch(accountActions.setIsLoading(false));
@@ -33,13 +27,7 @@ export function deleteAccount(id,) {
 
         dispatch(accountActions.setIsLoading(true));
         try {
-            const { data } = await request.delete(`api/users/${id}`,
-                {
-                    headers: {
-                        "Authorization": `Bearer ${getState().auth.user.token}`
-                    }
-                }
-            );
+            const { data } = await request.delete(`api/users/${id}`);
 
             dispatch(accountActions.setIsAccountDeleted(true));
             dispatch(accountActions.setIsLoading(false));
@@ -60,10 +48,7 @@ export function getAccounts(search, page = 1, limit = 7) {
         try {
             const { data } = await request.get(`api/users/`,
                 {
-                    params: { search, page, limit },
-                    headers: {
-                        "Authorization": `Bearer ${getState().auth.user.token}`
-                    }
+                    params: { search, page, limit }
                 }
             );
             dispatch(accountActions.setAccounts(data.users))

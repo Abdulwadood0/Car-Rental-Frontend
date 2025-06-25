@@ -11,7 +11,7 @@ import ResetPassword from "./pages/forms/ResetPassword";
 import LandingPage from "./pages/landingPage/LandingPage";
 import Footer from "./components/footer/Footer";
 import Cars from "./pages/carsPage/Cars";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CarReservation from "./pages/carsPage/CarReservation";
 import Payment from "./pages/paymentPage/Payment"
 import Profile from "./pages/profilePage/Profile";
@@ -29,13 +29,19 @@ import EditCar from "./pages/admin/cars/EditCar";
 import AdminReservations from "./pages/admin/reservations/AdminReservations";
 import CarCompanies from "./pages/admin/carCompanies/CarCompanies";
 import Accounts from "./pages/admin/accounts/Accounts";
-import { isTokenExpired } from "./utils/auth";
 import { useEffect } from "react";
+import { fetchCurrentUser } from "./redux/apiCalls/authApiCall";
+
 
 
 
 function App() {
 
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser())
+  }, [])
 
   const { i18n } = useTranslation();
   const user = useSelector((state) => state.auth.user);
@@ -65,27 +71,28 @@ function App() {
 
 
             <Route path="/cars" element={<Cars />} />
-            <Route path="/car-reservation" element={<CarReservation />} />
+            <Route path="/car-reservation" element={!user ? <Navigate to="/" /> : <CarReservation />} />
 
-            <Route path="/payment/:reservationId" element={<Payment />} />
-            <Route path="/payment/callback" element={<PaymentCallBack />} />
-
-
-            <Route path="/reservations" element={<Reservations />} />
-
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/payment/:reservationId" element={!user ? <Navigate to="/" /> : <Payment />} />
+            <Route path="/payment/callback" element={!user ? <Navigate to="/" /> : <PaymentCallBack />} />
 
 
+            <Route path="/reservations" element={!user ? <Navigate to="/" /> : <Reservations />} />
 
-            <Route path="/admin/cars" element={<AdminCars />} />
-            <Route path="/admin/car/add" element={<CreateCar />} />
-            <Route path="/admin/cars/edit/:id" element={<EditCar />} />
+            <Route path="/profile" element={!user ? <Navigate to="/" /> : <Profile />} />
 
-            <Route path="/admin/reservations" element={<AdminReservations />} />
 
-            <Route path="/admin/car-companies" element={<CarCompanies />} />
 
-            <Route path="/admin/accounts" element={<Accounts />} />
+            <Route path="/admin/cars" element={!user || !user.isAdmin ? <Navigate to="/" /> : <AdminCars />} />
+            <Route path="/admin/car/add" element={!user || !user.isAdmin ? <Navigate to="/" /> : <CreateCar />} />
+            <Route path="/admin/cars/edit/:id" element={!user || !user.isAdmin ? <Navigate to="/" /> : <EditCar />} />
+
+
+            <Route path="/admin/reservations" element={!user || !user.isAdmin ? <Navigate to="/" /> : <AdminReservations />} />
+
+            <Route path="/admin/car-companies" element={!user || !user.isAdmin ? <Navigate to="/" /> : <CarCompanies />} />
+
+            <Route path="/admin/accounts" element={!user || !user.isAdmin ? <Navigate to="/" /> : <Accounts />} />
 
             {/* Catch all route - must be last */}
             <Route path="*" element={<NotFound />} />

@@ -27,12 +27,7 @@ export function deleteCarCompany(id) {
         try {
             dispatch(carCompaniesActions.setLoading())
 
-            const { data } = await request.delete(`/api/companies/${id}`, {
-                headers: {
-                    "Authorization": `Bearer ${getState().auth.user.token}`,
-
-                }
-            })
+            const { data } = await request.delete(`/api/companies/${id}`)
 
 
             dispatch(carCompaniesActions.clearLoading())
@@ -55,12 +50,7 @@ export function createCarCompany(company) {
         try {
             dispatch(carCompaniesActions.setLoading())
 
-            const { data } = await request.post(`/api/companies`, company, {
-                headers: {
-                    "Authorization": `Bearer ${getState().auth.user.token}`,
-
-                }
-            })
+            const { data } = await request.post(`/api/companies`, company)
 
 
             dispatch(carCompaniesActions.clearLoading())
@@ -82,12 +72,7 @@ export function updateCarCompany(id, compamy) {
         try {
             dispatch(carCompaniesActions.setLoading())
 
-            const { data } = await request.patch(`/api/companies/${id}`, compamy, {
-                headers: {
-                    "Authorization": `Bearer ${getState().auth.user.token}`,
-
-                }
-            })
+            const { data } = await request.patch(`/api/companies/${id}`, compamy)
 
 
             dispatch(carCompaniesActions.clearLoading())

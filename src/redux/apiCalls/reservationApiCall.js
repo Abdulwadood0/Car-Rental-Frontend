@@ -6,11 +6,7 @@ export function CreateResevation(reservaition) {
     return async (dispatch, getState) => {
         try {
             dispatch(reservaitionActions.setLoading())
-            const { data } = await request.post("api/reservation", reservaition, {
-                headers: {
-                    "Authorization": `Bearer ${getState().auth.user.token}`
-                }
-            })
+            const { data } = await request.post("api/reservation", reservaition)
             dispatch(reservaitionActions.setReservation(data))
             dispatch(reservaitionActions.clearLoading())
             dispatch(reservaitionActions.setIsReservationCreated())
@@ -31,11 +27,7 @@ export function getReservations(status, t, page = 1, limit = 4, search) {
             const isAdmin = getState().auth.user.isAdmin;
 
             if (isAdmin) {
-                const { data } = await request.get(`api/reservation?status=${status}&page=${page}&limit=${limit}&search=${search}`, {
-                    headers: {
-                        "Authorization": `Bearer ${getState().auth.user.token}`
-                    }
-                })
+                const { data } = await request.get(`api/reservation?status=${status}&page=${page}&limit=${limit}&search=${search}`)
                 dispatch(reservaitionActions.setReservations(data.reservations))
                 dispatch(reservaitionActions.setCount(data.count))
                 dispatch(reservaitionActions.clearLoading())
@@ -44,11 +36,7 @@ export function getReservations(status, t, page = 1, limit = 4, search) {
             }
 
             if (!status) {
-                const { data } = await request.get(`api/reservation?page=${page}&limit=${limit}`, {
-                    headers: {
-                        "Authorization": `Bearer ${getState().auth.user.token}`
-                    }
-                })
+                const { data } = await request.get(`api/reservation?page=${page}&limit=${limit}`)
 
                 dispatch(reservaitionActions.setReservations(data.reservations))
                 dispatch(reservaitionActions.setCount(data.count))
@@ -56,11 +44,7 @@ export function getReservations(status, t, page = 1, limit = 4, search) {
                 return
             } else if (status) {
 
-                const { data } = await request.get(`api/reservation?status=${status}&page=${page}&limit=${limit}`, {
-                    headers: {
-                        "Authorization": `Bearer ${getState().auth.user.token}`
-                    }
-                })
+                const { data } = await request.get(`api/reservation?status=${status}&page=${page}&limit=${limit}`)
                 dispatch(reservaitionActions.setReservations(data.reservations))
                 dispatch(reservaitionActions.setCount(data.count))
                 dispatch(reservaitionActions.clearLoading())
@@ -83,11 +67,7 @@ export function patchReservation(reservaitionId, updates, t) {
     return async (dispatch, getState) => {
         try {
             dispatch(reservaitionActions.setLoading())
-            const { data } = await request.patch(`/api/reservation/${reservaitionId}`, updates, {
-                headers: {
-                    "Authorization": `Bearer ${getState().auth.user.token}`
-                }
-            })
+            const { data } = await request.patch(`/api/reservation/${reservaitionId}`, updates)
 
             toast.success(t(data.message), {
                 autoClose: 2000,

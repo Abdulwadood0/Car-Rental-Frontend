@@ -7,11 +7,7 @@ export function makePayment(reservationId, paymentInfo, t) {
         try {
             dispatch(paymentActions.setLoading())
 
-            const { data } = await request.post(`api/payment/${reservationId}`, paymentInfo, {
-                headers: {
-                    "Authorization": `Bearer ${getState().auth.user.token}`
-                }
-            })
+            const { data } = await request.post(`api/payment/${reservationId}`, paymentInfo)
 
             dispatch(paymentActions.clearLoading())
             if (data.redirectUrl) {
@@ -34,11 +30,7 @@ export function retryPayment(reservationId, paymentInfo, t) {
         try {
             dispatch(paymentActions.setLoading())
 
-            const { data } = await request.post(`/api/payment/retry/${reservationId}`, paymentInfo, {
-                headers: {
-                    "Authorization": `Bearer ${getState().auth.user.token}`
-                }
-            })
+            const { data } = await request.post(`/api/payment/retry/${reservationId}`, paymentInfo)
 
             dispatch(paymentActions.clearLoading())
             if (data.redirectUrl) {
