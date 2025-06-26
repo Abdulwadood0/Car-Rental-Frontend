@@ -5,7 +5,7 @@ import { authActions } from "../slices/authSlice";
 export function login(userData) {
     return async (dispatch) => {
         try {
-            const { data } = await request.post("api/auth/login", userData);
+            const data = await request.post("api/auth/login", userData);
             dispatch(authActions.setUser(data));
             dispatch(authActions.setIsLoading(false));
 
