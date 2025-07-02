@@ -74,7 +74,7 @@ function App() {
             <Route path="/car-reservation" element={!user ? <Navigate to="/" /> : <CarReservation />} />
 
             <Route path="/payment/:reservationId" element={!user ? <Navigate to="/" /> : <Payment />} />
-            <Route path="/payment/callback" element={!user ? <Navigate to="/" /> : <PaymentCallBack />} />
+            <Route path="/payment/callback" element={<PaymentCallBack />} />
 
 
             <Route path="/reservations" element={!user ? <Navigate to="/" /> : <Reservations />} />

@@ -24,13 +24,14 @@ export default function ReservationModal({ open, setOpen, reservation, action })
     };
 
     const handleSubmit = () => {
+        console.log(reservation)
 
         if (action === "cancel") {
-            dispatch(patchReservation(reservation._id, { status: "cancelled" }, t));
+            dispatch(patchReservation(reservation, { status: "cancelled" }, t));
         } else if (action === "start") {
-            dispatch(patchReservation(reservation._id, { status: "ongoing" }, t));
+            dispatch(patchReservation(reservation, { status: "ongoing" }, t));
         } else if (action === "end") {
-            dispatch(patchReservation(reservation._id, { status: "completed" }, t));
+            dispatch(patchReservation(reservation, { status: "completed" }, t));
         }
 
     };
