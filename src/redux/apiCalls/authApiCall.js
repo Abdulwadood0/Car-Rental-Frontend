@@ -49,7 +49,6 @@ export function fetchCurrentUser() {
     return async (dispatch) => {
         try {
             const { data } = await request.get("api/auth/me")
-            console.log(data)
             dispatch(authActions.setUser(data))
         } catch (error) {
             dispatch(authActions.logout())
