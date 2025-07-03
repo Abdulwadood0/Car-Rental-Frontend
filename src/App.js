@@ -29,7 +29,7 @@ import EditCar from "./pages/admin/cars/EditCar";
 import AdminReservations from "./pages/admin/reservations/AdminReservations";
 import CarCompanies from "./pages/admin/carCompanies/CarCompanies";
 import Accounts from "./pages/admin/accounts/Accounts";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchCurrentUser } from "./redux/apiCalls/authApiCall";
 
 
@@ -38,13 +38,25 @@ import { fetchCurrentUser } from "./redux/apiCalls/authApiCall";
 function App() {
 
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(fetchCurrentUser())
-  }, [])
-
   const { i18n } = useTranslation();
   const user = useSelector((state) => state.auth.user);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadUser = async () => {
+      await dispatch(fetchCurrentUser());
+      setLoading(false);
+    };
+
+    loadUser();
+  }, [dispatch]);
+
+  if (loading) {
+    return <></>
+  }
+
+
+
 
   return (
     <BrowserRouter>
