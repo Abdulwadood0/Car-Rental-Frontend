@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# 🚗 Car Rental Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend of the Car Rental Web App. It allows users to browse cars, register/login, make bookings, and for admins to manage the system through a responsive dashboard.
 
-## Available Scripts
+## 🧱 Tech Stack
 
-In the project directory, you can run:
+- React
+- Redux
+- React Router
+- Material UI
+- Axios
+- i18next (for multilingual support: English & Arabic)
+- Vercel (deployment)
 
-### `npm start`
+## ✨ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Fully responsive design using Material UI
+- English and Arabic language toggle (i18next)
+- Login / Register with JWT via HTTP-only cookies
+- Browse available cars with images
+- Make reservations with payment (via Moyassar through backend)
+- Admin dashboard: manage cars, bookings, and users
+- State management with Redux
+- Cloudinary-hosted car images fetched from backend
+- Connected to a Node.js backend (hosted on AWS EC2)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 Getting Started
 
-### `npm test`
+### 1. Clone the Repo
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone https://github.com/Abdulwadood0/Car-Rental-Frontend.git
+cd car-rental-frontend
+```
 
-### `npm run build`
+### 2. Install Dependencies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. Environment Variables
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Create a `.env` file and add:
 
-### `npm run eject`
+```
+REACT_APP_API_URL=http://your-ec2-backend-url/api
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Replace with your actual backend EC2 URL.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 4. Run Locally
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Runs on `http://localhost:3000`.
 
-## Learn More
+## 🌐 Deployment
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The frontend is deployed on **Vercel**.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Make sure to configure the `REACT_APP_API_URL` environment variable in your Vercel project settings to point to your backend.
 
-### Code Splitting
+## 📷 Screenshots of Admin Dashboard
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/7b5bc321-0884-4e68-940e-1953b817a6ff" width="300" style="margin-right:10px;" />
+  <img src="https://github.com/user-attachments/assets/83fe5b0b-7d87-40b1-8387-325351e6417d" width="300" style="margin-right:10px;" />
+  <img src="https://github.com/user-attachments/assets/d78bb199-9da2-41aa-b07d-ab127cc8b659" width="300" />
+</p>
 
-### Analyzing the Bundle Size
+<p float="left" style="margin-top:10px;">
+  <img src="https://github.com/user-attachments/assets/e558672d-1e27-44db-8a1a-53115ae05a91" width="300" style="margin-right:10px;" />
+  <img src="https://github.com/user-attachments/assets/aa25e5e2-1e50-4b8b-a56e-4b67d44588a5" width="300" style="margin-right:10px;" />
+  <img src="https://github.com/user-attachments/assets/3cbe7989-0764-4985-88de-6990a4468e6b" width="300" />
+</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<p float="left" style="margin-top:10px;">
+  <img src="https://github.com/user-attachments/assets/03ed626a-2a26-4bf8-9948-3f04ee5717c1" width="300" />
+</p>
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
