@@ -16,6 +16,7 @@ import TranslateIcon from '@mui/icons-material/Translate';
 import { logout } from '../../redux/apiCalls/authApiCall';
 import { useDispatch } from 'react-redux';
 import AdminDrawer from '../adminDrawer/AdminDrawer';
+import LanguageIcon from '@mui/icons-material/Language';
 
 
 export default function MenuAppBar() {
@@ -46,6 +47,20 @@ export default function MenuAppBar() {
         setAnchorEl(null);
         localStorage.setItem("lang", i18n.language === 'ar' ? 'en' : 'ar')
         i18n.changeLanguage(i18n.language === 'ar' ? 'en' : 'ar');
+    };
+
+    // Add: state and handlers for language menu
+    const [anchorElLang, setAnchorElLang] = React.useState(null);
+    const handleOpenLangMenu = (event) => {
+        setAnchorElLang(event.currentTarget);
+    };
+    const handleCloseLangMenu = () => {
+        setAnchorElLang(null);
+    };
+    const handleSelectLanguage = (lang) => {
+        localStorage.setItem("lang", lang);
+        i18n.changeLanguage(lang);
+        handleCloseLangMenu();
     };
 
     const handleLogout = () => {
@@ -237,26 +252,13 @@ export default function MenuAppBar() {
 
 
                         {/* right side */}
-                        <div>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="inherit"
-                            >
-
-
-                                <AccountCircle sx={{ fontSize: { xs: '2rem', md: '2.6rem' } }} />
-
-
-                            </IconButton>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <LanguageIcon onClick={handleOpenLangMenu} sx={{ color: "#ffffff", cursor: "pointer" }} />
                             <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
+                                id="lang-menu"
+                                anchorEl={anchorElLang}
                                 anchorOrigin={{
-                                    vertical: 'top',
+                                    vertical: 'bottom',
                                     horizontal: 'right',
                                 }}
                                 keepMounted
@@ -264,21 +266,122 @@ export default function MenuAppBar() {
                                     vertical: 'top',
                                     horizontal: 'right',
                                 }}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
+                                open={Boolean(anchorElLang)}
+                                onClose={handleCloseLangMenu}
                                 sx={{
                                     '& .MuiPaper-root': {
                                         backgroundColor: '#1a1a1a',
                                         border: '1px solid rgba(255,255,255,0.1)',
                                         borderRadius: '10px',
                                         boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-                                        mt: "50px"
                                     }
                                 }}
                             >
+                                <MenuItem onClick={() => handleSelectLanguage('en')}>
+                                    <Typography sx={{ color: "#ffffff" }}>
+                                        English
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem onClick={() => handleSelectLanguage('ar')}>
+                                    <Typography sx={{ color: "#ffffff" }}>
+                                        العربية
+                                    </Typography>
+                                </MenuItem>
+                            </Menu>
 
-                                <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
-                                    <MenuItem onClick={handleClose} sx={{
+                            <div >
+                                <IconButton
+                                    size="large"
+                                    aria-label="account of current user"
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    onClick={handleMenu}
+                                    color="inherit"
+                                >
+
+
+                                    <AccountCircle sx={{ fontSize: { xs: '2rem', md: '2.6rem' } }} />
+
+
+                                </IconButton>
+
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorEl}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                                    sx={{
+                                        '& .MuiPaper-root': {
+                                            backgroundColor: '#1a1a1a',
+                                            border: '1px solid rgba(255,255,255,0.1)',
+                                            borderRadius: '10px',
+                                            boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+                                            mt: "50px"
+                                        }
+                                    }}
+                                >
+
+                                    <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                                        <MenuItem onClick={handleClose} sx={{
+                                            display: user ? "block" : "none",
+                                        }}>
+                                            <Typography sx={{
+                                                color: "#ffffff",
+                                                fontWeight: 500,
+                                                transition: "color 0.3s ease",
+                                                '&:hover': {
+                                                    color: "#f97316"
+                                                }
+                                            }}>
+                                                {t("Account")}
+                                            </Typography>
+                                        </MenuItem>
+                                    </Link>
+
+                                    <Link to="/login" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                                        <MenuItem onClick={handleClose} sx={{
+                                            display: !user ? "block" : "none",
+                                        }}>
+                                            <Typography sx={{
+                                                color: "#ffffff",
+                                                fontWeight: 500,
+                                                transition: "color 0.3s ease",
+                                                '&:hover': {
+                                                    color: "#f97316"
+                                                }
+                                            }}>
+                                                {t("Sign In")}
+                                            </Typography>
+                                        </MenuItem>
+                                    </Link>
+
+                                    <Link to="/signup" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+                                        <MenuItem onClick={handleClose} sx={{
+                                            display: !user ? "block" : "none",
+                                        }}>
+                                            <Typography sx={{
+                                                color: "#ffffff",
+                                                fontWeight: 500,
+                                                transition: "color 0.3s ease",
+                                                '&:hover': {
+                                                    color: "#f97316"
+                                                }
+                                            }}>
+                                                {t("Sign Up")}
+                                            </Typography>
+                                        </MenuItem>
+                                    </Link>
+
+                                    <MenuItem onClick={handleLogout} sx={{
                                         display: user ? "block" : "none",
                                     }}>
                                         <Typography sx={{
@@ -289,77 +392,14 @@ export default function MenuAppBar() {
                                                 color: "#f97316"
                                             }
                                         }}>
-                                            {t("Account")}
+                                            {t("Logout")}
                                         </Typography>
                                     </MenuItem>
-                                </Link>
 
-                                <Link to="/login" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
-                                    <MenuItem onClick={handleClose} sx={{
-                                        display: !user ? "block" : "none",
-                                    }}>
-                                        <Typography sx={{
-                                            color: "#ffffff",
-                                            fontWeight: 500,
-                                            transition: "color 0.3s ease",
-                                            '&:hover': {
-                                                color: "#f97316"
-                                            }
-                                        }}>
-                                            {t("Sign In")}
-                                        </Typography>
-                                    </MenuItem>
-                                </Link>
 
-                                <Link to="/signup" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
-                                    <MenuItem onClick={handleClose} sx={{
-                                        display: !user ? "block" : "none",
-                                    }}>
-                                        <Typography sx={{
-                                            color: "#ffffff",
-                                            fontWeight: 500,
-                                            transition: "color 0.3s ease",
-                                            '&:hover': {
-                                                color: "#f97316"
-                                            }
-                                        }}>
-                                            {t("Sign Up")}
-                                        </Typography>
-                                    </MenuItem>
-                                </Link>
+                                </Menu>
 
-                                <MenuItem onClick={handleLogout} sx={{
-                                    display: user ? "block" : "none",
-                                }}>
-                                    <Typography sx={{
-                                        color: "#ffffff",
-                                        fontWeight: 500,
-                                        transition: "color 0.3s ease",
-                                        '&:hover': {
-                                            color: "#f97316"
-                                        }
-                                    }}>
-                                        {t("Logout")}
-                                    </Typography>
-                                </MenuItem>
-
-                                <MenuItem onClick={handleChangeLanguage}>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                        <TranslateIcon sx={{ color: "#f97316" }} />
-                                        <Typography sx={{
-                                            color: "#ffffff",
-                                            fontWeight: 500,
-                                            fontFamily: i18n.language === 'ar' ? 'Lexend' : 'Cairo',
-                                            transition: "color 0.3s ease",
-                                            '&:hover': {
-                                                color: "#f97316"
-                                            }
-                                        }}>
-                                            {i18n.language === 'ar' ? t('English') : t('العربية')}
-                                        </Typography>
-                                    </Box>
-                                </MenuItem>
-                            </Menu>
+                            </div>
                         </div>
                     </Toolbar>
                 </AppBar>
