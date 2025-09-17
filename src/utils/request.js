@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const request = axios.create({
-    // baseURL: process.env.REACT_APP_BACKEND_URL,
+    baseURL: process.env.REACT_APP_BACKEND_URL,
     // withCredentials: true, // 👈 SEND COOKIES automatically
-    baseURL: "http://localhost:5000",
+    // baseURL: "http://localhost:5000",
 });
 
 // Store reference to dispatch function
@@ -45,7 +45,7 @@ request.interceptors.response.use(
 
             try {
                 const { data } = await axios.post(
-                    "http://localhost:5000/api/auth/refresh",
+                    process.env.REACT_APP_BACKEND_URL + "/api/auth/refresh",
                     {},
                     { withCredentials: true } // Only here for refresh token cookie
                 );

@@ -42,7 +42,7 @@ export function deleteAccount(id,) {
 
 
 export function getAccounts(search, page = 1, limit = 7) {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
 
         dispatch(accountActions.setIsLoading(true));
         try {
