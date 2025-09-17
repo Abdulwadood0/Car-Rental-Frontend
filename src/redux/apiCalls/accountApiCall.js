@@ -42,15 +42,14 @@ export function deleteAccount(id,) {
 
 
 export function getAccounts(search, page = 1, limit = 7) {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
 
         dispatch(accountActions.setIsLoading(true));
         try {
-            const { data } = await request.get(`api/users/`,
-                {
-                    params: { search, page, limit }
-                }
-            );
+            const { data } = await request.get(`api/users/`, {
+                params: { search, page, limit }
+            });
+
             dispatch(accountActions.setAccounts(data.users))
             dispatch(accountActions.setCount(data.count))
             dispatch(accountActions.setIsLoading(false));

@@ -5,8 +5,9 @@ import { authActions } from "../slices/authSlice";
 export function login(userData) {
     return async (dispatch) => {
         try {
-            const { data } = await request.post("api/auth/login", userData);
-            dispatch(authActions.setUser(data));
+            const { data } = await request.post("api/auth/login", userData, { withCredentials: true });
+            dispatch(authActions.setUser(data.user));
+            dispatch(authActions.setAccessToken(data.accessToken));
             dispatch(authActions.setIsLoading(false));
 
         } catch (error) {
@@ -19,7 +20,7 @@ export function login(userData) {
 export function logout() {
     return async (dispatch) => {
         try {
-            await request.post("api/auth/logout")
+            await request.post("api/auth/logout", {}, { withCredentials: true })
             dispatch(authActions.logout());
 
         } catch (error) {
@@ -46,10 +47,14 @@ export function register(userData) {
 }
 
 export function fetchCurrentUser() {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         try {
+
             const { data } = await request.get("api/auth/me")
             dispatch(authActions.setUser(data))
+
+
+
         } catch (error) {
             dispatch(authActions.logout())
         }

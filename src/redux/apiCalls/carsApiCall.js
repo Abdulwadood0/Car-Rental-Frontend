@@ -12,13 +12,7 @@ export function getCars(search, page = 1, companyId = '', sortBy = '', limit = 6
                 params: { search, page, limit, companyId, sortBy }
             };
 
-            // only attach header if we have a real token
-            const token = getState().auth.user?.token;
-            if (token) {
-                config.headers = {
-                    Authorization: `Bearer ${token}`
-                };
-            }
+
 
             const { data } = await request.get("/api/cars", config);
 

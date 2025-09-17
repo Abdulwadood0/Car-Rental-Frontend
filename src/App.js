@@ -31,6 +31,7 @@ import CarCompanies from "./pages/admin/carCompanies/CarCompanies";
 import Accounts from "./pages/admin/accounts/Accounts";
 import { useEffect, useState } from "react";
 import { fetchCurrentUser } from "./redux/apiCalls/authApiCall";
+import { setAxiosDispatch, setTokenGetter } from "./utils/request";
 
 
 
@@ -40,6 +41,7 @@ function App() {
   const dispatch = useDispatch()
   const { i18n } = useTranslation();
   const user = useSelector((state) => state.auth.user);
+  const accessToken = useSelector((state) => state.auth.accessToken);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -50,6 +52,18 @@ function App() {
 
     loadUser();
   }, [dispatch]);
+
+  // Set axios dispatch once when component mounts
+  useEffect(() => {
+    setAxiosDispatch(dispatch);
+  }, [dispatch]);
+
+  // Update token getter when accessToken changes
+  useEffect(() => {
+    setTokenGetter(() => accessToken);
+  }, [accessToken]);
+
+
 
   if (loading) {
     return <></>

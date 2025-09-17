@@ -24,7 +24,6 @@ export default function ReservationModal({ open, setOpen, reservation, action })
     };
 
     const handleSubmit = () => {
-        console.log(reservation)
 
         if (action === "cancel") {
             dispatch(patchReservation(reservation, { status: "cancelled" }, t));
