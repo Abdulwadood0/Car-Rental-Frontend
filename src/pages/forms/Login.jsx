@@ -28,7 +28,7 @@ const Login = () => {
     const isRTL = localStorage.getItem("i18nextLng") === "ar";
 
     const dispatch = useDispatch();
-    const [username, setUsername] = useState("");
+    const [usernameOrEmail, setUsernameOrEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
@@ -43,19 +43,19 @@ const Login = () => {
     };
 
     const handleSubmit = (e) => {
-        const trimmedUsername = username.trim().toLowerCase();
+        const trimmedUsernameOrEmail = usernameOrEmail.trim().toLowerCase();
         const trimmedPassword = password.trim();
 
         e.preventDefault();
 
-        if (trimmedUsername === "" || trimmedPassword === "") {
+        if (trimmedUsernameOrEmail === "" || trimmedPassword === "") {
             dispatch(authActions.setErrorMessage("All fields are required"));
             return;
         }
 
 
         dispatch(authActions.setIsLoading(true));
-        dispatch(login({ username: trimmedUsername, password: trimmedPassword }));
+        dispatch(login({ usernameOrEmail: trimmedUsernameOrEmail, password: trimmedPassword }));
     }
 
 
@@ -79,10 +79,10 @@ const Login = () => {
                             margin="normal"
                             required
                             fullWidth
-                            label={t("Username")}
+                            label={t("Username or Email")}
                             autoFocus
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={usernameOrEmail}
+                            onChange={(e) => setUsernameOrEmail(e.target.value)}
                             InputProps={{
                                 dir: isRTL ? "rtl" : "ltr"
                             }}
