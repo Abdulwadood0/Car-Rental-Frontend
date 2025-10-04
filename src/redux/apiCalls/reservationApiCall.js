@@ -63,11 +63,11 @@ export function getReservations(status, t, page = 1, limit = 4, search) {
     }
 }
 
-export function patchReservation(reservaitionId, updates, t) {
+export function patchReservation(reservaition, updates, t) {
     return async (dispatch, getState) => {
         try {
             dispatch(reservaitionActions.setLoading())
-            const { data } = await request.patch(`/api/reservation/${reservaitionId}`, updates)
+            const { data } = await request.patch(`/api/reservation/${reservaition._id}`, updates)
 
             toast.success(t(data.message), {
                 autoClose: 2000,
